@@ -8,20 +8,20 @@ pipeline {
 
         
     }
-}
-stages {
-    stage('Commit Stage') {
-        agent {
-            label 'linux-build-2'
-        }
-        steps {
-            script {
-                sh """
-                    dotnet restore 
-                    dotnet build
-                    dotnet publish -c Release
-                    zip -r ${env.configName}-${env.version}.zip publish
-                    """
+    stages {
+        stage('Commit Stage') {
+            agent {
+                label 'linux-build-2'
+            }
+            steps {
+                script {
+                    sh """
+                        dotnet restore 
+                        dotnet build
+                        dotnet publish -c Release
+                        zip -r ${env.configName}-${env.version}.zip publish
+                        """
+                }
             }
         }
     }
